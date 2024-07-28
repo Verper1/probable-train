@@ -1,0 +1,71 @@
+import random 
+import time
+
+def game():
+    pl_lives = 3
+    pc_lives= 3
+    
+    print('''
+Now you will play a game of dice. The goal of the game is to score more points 
+on the dice. Everyone has 2 bones in total. Each has 3 lives. You will play 
+with the computer. 
+Good luck!
+''')
+    time.sleep(5)
+
+    while pl_lives != 0 or pc_lives != 0:
+        
+        try:
+            desicion = int(input('\nRoll the dice? (1 - yes, 2 - no and quit): '))
+            
+            if desicion == 1:
+                pl_dice_1, pl_dice_2 = random.randint(1, 6), random.randint(1, 6)
+                print(f'\nYour dice is: {pl_dice_1} and {pl_dice_2}')
+                pc_dice_1, pc_dice_2 = random.randint(1, 6), random.randint(1, 6)
+                print(f'\nPC dice is: {pc_dice_1} and {pc_dice_2}')
+                time.sleep(3)
+                
+                if pl_dice_1 + pl_dice_2 > pc_dice_1 + pl_dice_2:
+                    print('\nPlayer win!')
+                    pc_lives -= 1
+                    time.sleep(3)
+                else:
+                    print('\nPC win!')
+                    pl_lives -= 1
+                    time.sleep(3)
+            elif desicion == 2:
+                print('\nSee you next time!')
+                break
+            else:
+                print('\nYou need to enter 1 or 2. Try again!')
+                time.sleep(2)
+                continue
+        except ValueError:
+            print('\nYou need to enter 1 or 2. Try again!')
+            time.sleep(2)
+            
+
+if __name__ == '__main__':
+    answer = input('Do you want to play a game? (yes or no): ').lower().strip().replace(' ', '')
+    
+    while True:
+        if answer == 'yes':
+            game()
+            while True:
+                sequel = (input('\nDo you wanna play one more time in this game? Your answer is: ').lower().strip()
+                          .replace(' ', ''))
+                if sequel == 'yes':
+                    game()
+                elif sequel == 'no':
+                    print('\nOK. See you next time!')
+                    break
+                else:
+                    print('\nError: you can enter word "yes" and "no" only')
+                    continue
+        elif answer == 'no':
+            print('\nThen why are you here?')
+            break
+        else:
+            print('\nError: you can enter word "yes" and "no" only')
+            time.sleep(2)
+            continue
