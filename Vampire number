@@ -1,0 +1,57 @@
+import time 
+
+
+def word_vampire():
+    print('''
+\nThis program is needed to check a number for a vampire number. Enter two numbers 
+and if the multiplication of these numbers is equal to the vampire number, you 
+will be notified about this''')
+
+    conditions = 0
+    all_letters = []
+    answer_letters =  []
+
+    while True:
+        try:
+            first_number = int(input('\nEnter first number: '))
+            second_number = int(input('\nEnter second number: '))
+            answer = first_number * second_number
+            print('\nThe product of these numbers is equal:', answer)
+            
+            time.sleep(1)
+            
+            first_number = str(first_number)
+            second_number = str(second_number)
+            answer = str(answer)
+            
+            for i in first_number:
+                all_letters.append(i)
+            for i in second_number:
+                all_letters.append(i)
+            for i in answer:
+                answer_letters.append(i)
+            for i, answer_letter in enumerate(answer_letters):
+                if answer_letter in all_letters:
+                    all_letters.remove(answer_letter)
+                    
+            if len(answer) == (len(first_number) + len(second_number)):
+                conditions += 1
+            if ((first_number[-1] == '0') and (second_number[-1] != '0')) or ((second_number[-1] == '0') and (first_number[-1] != '0')):
+                conditions += 1
+            else:
+                conditions += 1
+            if len(all_letters) == 0:
+                conditions += 1
+                
+            if conditions == 3:
+                print(f'\n{answer} is a vampire number')
+                break
+            else:
+                print(f'\n{answer} is not a vampire number')
+                break
+        except ValueError:
+            print('\nYou need to enter NUMBER. Try again!')
+            continue
+    
+    
+word_vampire()
